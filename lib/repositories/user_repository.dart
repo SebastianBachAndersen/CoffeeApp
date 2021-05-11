@@ -6,7 +6,7 @@ class UserRepository {
   ApiProvider _provider = ApiProvider();
 
   Future<bool> verifyUserLoggedIn() async {
-    await _provider.get('status');
+    //await _provider.get('status');
     return true;
   }
 
