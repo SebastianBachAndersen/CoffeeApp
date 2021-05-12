@@ -4,8 +4,10 @@ import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dar
 import 'package:the_coffe_collection/bloc/login/login_bloc.dart';
 import 'package:the_coffe_collection/repositories/user_repository.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key key}) : super(key: key);
+import 'login.dart';
+
+class LoginRoute extends StatelessWidget {
+  LoginRoute({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -25,12 +25,11 @@ class _LoginFormState extends State<LoginPage> {
         }),
         Focus(
             child: StyledTextField('Kodeord', _passwordController,
-                isPassword: true, lastField: true, submitHandler: (_) {
+                isPassword: true, submitHandler: (_) {
           BlocProvider.of<LoginBloc>(context).add(
             LoginUser(
                 identifier: _emailController.text,
-                password: _passwordController.text,
-                rememberMe: rememberMe),
+                password: _passwordController.text),
           );
         })),
       ],
@@ -65,13 +64,6 @@ class _LoginFormState extends State<LoginPage> {
                             child: SafeArea(
                                 child: Column(children: <Widget>[
                               _usernamePasswordWidget(),
-                              StyledCheckBox(
-                                value: rememberMe,
-                                text: 'Forbliv logget ind',
-                                callback: (checked) => setState(() {
-                                  rememberMe = checked;
-                                }),
-                              ),
                               BlocBuilder<LoginBloc, LoginState>(
                                 builder: (context, state) {
                                   return StyledRaisedButton(context,
@@ -81,8 +73,7 @@ class _LoginFormState extends State<LoginPage> {
                                     BlocProvider.of<LoginBloc>(context).add(
                                       LoginUser(
                                           identifier: _emailController.text,
-                                          password: _passwordController.text,
-                                          rememberMe: rememberMe),
+                                          password: _passwordController.text),
                                     );
                                   });
                                 },

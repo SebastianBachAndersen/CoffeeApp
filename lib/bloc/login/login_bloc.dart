@@ -25,8 +25,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginUser parsedEvent = event;
 
       try {
-        await userRepository.login(parsedEvent.identifier, parsedEvent.password,
-            parsedEvent.rememberMe);
+        await userRepository.login(
+            parsedEvent.identifier, parsedEvent.password);
 
         authenticationBloc.add(LoggedIn());
         yield LoginInitial();
@@ -38,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         String errorMessage = error.response.data;
 
-        if (errorMessage == "Invalid Username/Email or Password") {
+        if (errorMessage == "error in username or password") {
           yield LoginError(reason: LoginErrorReason.invalidCredentials);
           return;
         }

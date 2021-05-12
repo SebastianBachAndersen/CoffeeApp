@@ -14,7 +14,7 @@ class LoginResult extends Equatable {
     return LoginResult(
         userId: json['userId'],
         userName: json['userName'],
-        token: json['token']);
+        token: json['Token']);
   }
 
   Map<String, dynamic> toJson() {
@@ -22,7 +22,7 @@ class LoginResult extends Equatable {
 
     data['userId'] = this.userId;
     data['userName'] = this.userName;
-    data['token'] = this.token;
+    data['Token'] = this.token;
 
     return data;
   }

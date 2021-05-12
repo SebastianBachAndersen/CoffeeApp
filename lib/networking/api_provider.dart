@@ -19,8 +19,13 @@ class ApiProvider {
       fullUrl = _baseUrl + url;
     }
 
-    final response =
-        await _httpClient.get(fullUrl, queryParameters: queryParams);
+    final response = await _httpClient.get(fullUrl,
+        queryParameters: queryParams,
+        options: Options(
+            followRedirects: false,
+            validateStatus: (status) {
+              return status < 500;
+            }));
 
     return response.data;
   }
@@ -44,7 +49,10 @@ class ApiProvider {
       body = jsonBody;
     }
 
-    final response = await _httpClient.post(fullUrl, data: body);
+    final response = await _httpClient.post(fullUrl, data: body,
+        options: Options(validateStatus: (status) {
+      return status < 500;
+    }));
 
     return response.data;
   }
@@ -70,7 +78,10 @@ class ApiProvider {
       body = encodedBody;
     }
 
-    final response = await _httpClient.put(fullUrl, data: body);
+    final response = await _httpClient.put(fullUrl, data: body,
+        options: Options(validateStatus: (status) {
+      return status < 500;
+    }));
 
     return response.data;
   }
@@ -85,7 +96,10 @@ class ApiProvider {
       fullUrl = _baseUrl + url;
     }
 
-    final response = await _httpClient.delete(fullUrl);
+    final response = await _httpClient.delete(fullUrl,
+        options: Options(validateStatus: (status) {
+      return status < 500;
+    }));
 
     return response.data;
   }

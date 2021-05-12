@@ -13,14 +13,14 @@ import 'bloc/authentication/authentication_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  //startDevelopment();
-  runApp(MyApp());
+  startDevelopment();
+  runApp(MyApps());
 }
 
 void startDevelopment() {
   AppConfig.getInstance(
-    baseUrl: 'https://192.168.0.78:5001',
-    apiUrl: 'https://192.168.0.78:5001/api/',
+    baseUrl: 'https://thecoffeecollection.dk',
+    apiUrl: 'https://thecoffeecollection.dk/api/',
   );
 }
 
@@ -62,7 +62,7 @@ class MyApps extends StatelessWidget {
             ],
             title: 'The Coffee Collection',
             theme: ThemeData(
-              primarySwatch: CustomColors.primaryColor,
+              primarySwatch: CustomColors.primaryColorMaterial,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             home: LandingPage()),
