@@ -10,12 +10,10 @@ class Settings extends StatefulWidget {
 class _State extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff49281A),
-          title: const Text('Settings'),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff49281A),
+        title: const Text('Settings'),
       ),
     );
   }

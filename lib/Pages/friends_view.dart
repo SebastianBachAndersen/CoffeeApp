@@ -11,23 +11,19 @@ class FriendsView extends StatefulWidget {
 class _State extends State<FriendsView> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff49281A),
-          title: const Text('friends'),
-          actions: [
-            IconButton(
-                icon: const Icon(Icons.person_add),
-                tooltip: 'Show Snackbar',
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddFriendsView()));
-                }),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff49281A),
+        title: const Text('friends'),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.person_add),
+              tooltip: 'Show Snackbar',
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddFriendsView()));
+              }),
+        ],
       ),
     );
   }

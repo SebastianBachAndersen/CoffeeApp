@@ -10,12 +10,10 @@ class AddFriendsView extends StatefulWidget {
 class _State extends State<AddFriendsView> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff49281A),
-          title: const Text('AddFriendsView'),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff49281A),
+        title: const Text('AddFriendsView'),
       ),
     );
   }
