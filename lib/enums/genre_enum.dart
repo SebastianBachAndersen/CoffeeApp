@@ -1,0 +1,17 @@
+enum Genre {
+  arabica,
+  americano,
+  affogato,
+  black,
+  cappuccino,
+  cortado,
+  doppio,
+  espresso,
+  irish,
+  lungo,
+  latte,
+  macchiato,
+  mocha,
+  robusta,
+  redEye,
+}

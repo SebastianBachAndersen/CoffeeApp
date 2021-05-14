@@ -1,0 +1,4 @@
+enum ServingStyle {
+  arabica,
+  americano,
+}
