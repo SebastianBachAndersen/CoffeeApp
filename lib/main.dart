@@ -14,7 +14,7 @@ import 'bloc/authentication/authentication_bloc.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   startDevelopment();
-  runApp(MyApps());
+  runApp(MyApp());
 }
 
 void startDevelopment() {

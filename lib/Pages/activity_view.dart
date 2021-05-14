@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/CoffeeSearchCard.dart';
 import 'landing_page.dart';
 
 class ActivityView extends StatefulWidget {
@@ -16,6 +17,7 @@ class _State extends State<ActivityView> {
           backgroundColor: Color(0xff49281A),
           title: const Text('Main activity'),
         ),
+        body: CoffeeSearchCard(),
       ),
     );
   }
