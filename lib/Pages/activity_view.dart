@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:the_coffe_collection/utils/shared_preferences.dart';
 
 import '../components/CoffeeSearchCard.dart';
 import 'landing_page.dart';
+
+SharedPreference prefer = new SharedPreference();
 
 class ActivityView extends StatefulWidget {
   @override

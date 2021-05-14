@@ -18,7 +18,8 @@ class UserRepository {
     Map<String, dynamic> data = {'Email': identifier, 'Password': password};
     SharedPreference token = new SharedPreference();
     final response = await _provider.post('Login', jsonBody: data);
-    token.save(response['token']);
+    await token.save(response['token']);
+    print(await token.read());
     return User.fromJson(response['user']);
   }
 
