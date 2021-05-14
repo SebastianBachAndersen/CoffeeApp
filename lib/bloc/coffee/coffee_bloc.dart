@@ -22,6 +22,7 @@ class CoffeeBloc extends Bloc<CoffeeEvent, CoffeeState> {
 
       try {
         List<Coffee> coffees = await coffeeRepository.getCoffees();
+        yield CoffeeListLoaded(coffees: coffees);
       } on DioError catch (error) {
         if (error.type != DioErrorType.response) {
           yield CoffeeError(reason: GenericApiErrorReason.noConnection);
