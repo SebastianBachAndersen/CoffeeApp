@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_coffe_collection/Pages/friends_view.dart';
 import 'package:the_coffe_collection/Pages/settings.dart';
+import 'package:the_coffe_collection/components/User_placeholder.dart';
 
 import '../components/User_placeholder.dart';
 import 'landing_page.dart';
