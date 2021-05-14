@@ -1,0 +1,1 @@
+enum GenericApiErrorReason { noConnection, unauthorized }
