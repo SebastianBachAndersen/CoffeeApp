@@ -88,13 +88,13 @@ class User_placeholder extends StatelessWidget {
                 ),
               ),
               Pinned.fromPins(
-                Pin(size: 62.0, middle: 0.4892),
-                Pin(size: 19.0, end: 17.0),
+                Pin(size: 98.0, middle: 0.4881),
+                Pin(size: 30.0, end: 6.0),
                 child: Text(
                   'Username',
                   style: TextStyle(
                     fontFamily: 'Segoe UI',
-                    fontSize: 14,
+                    fontSize: 22,
                     color: const Color(0xffab6832),
                   ),
                   textAlign: TextAlign.left,
