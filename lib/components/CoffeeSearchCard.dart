@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:the_coffe_collection/enums/genre_enum.dart';
 
 class CoffeeSearchCard extends StatelessWidget {
+  String coffeeName;
+  String coffeeCompany;
+  Genre coffeeGenre;
   CoffeeSearchCard({
     Key key,
   }) : super(key: key);
@@ -46,7 +50,7 @@ class CoffeeSearchCard extends StatelessWidget {
               Transform.translate(
                 offset: Offset(73.0, 4.0),
                 child: Text(
-                  'Peets instant coffee',
+                  coffeeName ?? "Coffee Name",
                   style: TextStyle(
                     fontFamily: 'Arial',
                     fontSize: 20,
@@ -59,7 +63,7 @@ class CoffeeSearchCard extends StatelessWidget {
               Transform.translate(
                 offset: Offset(73.0, 39.0),
                 child: Text(
-                  'Peets',
+                  coffeeCompany ?? "Coffee Company",
                   style: TextStyle(
                     fontFamily: 'Arial',
                     fontSize: 18,
@@ -71,7 +75,7 @@ class CoffeeSearchCard extends StatelessWidget {
               Transform.translate(
                 offset: Offset(73.0, 68.0),
                 child: Text(
-                  'Instant coffee',
+                  coffeeGenre.toString() ?? "Coffee Genre",
                   style: TextStyle(
                     fontFamily: 'Arial',
                     fontSize: 16,
