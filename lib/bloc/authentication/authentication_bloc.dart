@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/repositories/user_repository.dart';
 
@@ -24,9 +25,11 @@ class AuthenticationBloc
     if (event is AppStarted) {
       try {
         final bool loggedIn = await userRepository.verifyUserLoggedIn();
-        if (!loggedIn) {
+        if (loggedIn) {
           var currentUser = await userRepository.getAuthenticatedUser();
           yield AuthenticationAuthenticated(user: currentUser);
+        } else {
+          yield AuthenticationUnauthenticated();
         }
       } on DioError {
         // TODO: Also check for connection issues & show a "no connection" error if they occur
@@ -41,7 +44,8 @@ class AuthenticationBloc
 
     if (event is LoggedOut) {
       yield AuthenticationLoading();
-      await userRepository.logout();
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.clear();
       yield AuthenticationUnauthenticated();
     }
   }

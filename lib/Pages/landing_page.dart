@@ -25,11 +25,9 @@ class LandingPage extends StatelessWidget {
         }
 
         return Material(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text("bruh")],
-            ),
+          child: Container(
+            decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
+            child: Center(child: CircularProgressIndicator()),
           ),
         );
       }),

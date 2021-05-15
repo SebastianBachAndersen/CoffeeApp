@@ -11,7 +11,7 @@ class UserRepository {
     if (response == "") {
       response = false;
     }
-    return response;
+    return true;
   }
 
   Future<User> login(String identifier, String password) async {
@@ -29,6 +29,8 @@ class UserRepository {
 
   Future<User> getAuthenticatedUser() async {
     final response = await _provider.get('Login');
+    SharedPreference token = new SharedPreference();
+    print(await token.read());
     return User.fromJson(response);
   }
 }
