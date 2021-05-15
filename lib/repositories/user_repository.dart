@@ -9,7 +9,7 @@ class UserRepository {
   Future<bool> verifyUserLoggedIn() async {
     var response = await _provider.get('Login/Status');
     if (response == "") {
-      response = false;
+      return false;
     }
     return true;
   }

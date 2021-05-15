@@ -9,6 +9,14 @@ class RateCoffeeView extends StatefulWidget {
 }
 
 class _State extends State<RateCoffeeView> {
+  List<String> images = [
+    "https://placeimg.com/500/500/any",
+    "https://placeimg.com/500/500/any",
+    "https://placeimg.com/500/500/any",
+    "https://placeimg.com/500/500/any",
+    "https://placeimg.com/500/500/any"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +26,18 @@ class _State extends State<RateCoffeeView> {
       ),
       body: Center(
         child: Column(
-          children: [
-            Container(),
+          children: <Widget>[
+            Flexible(
+              child: GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 8.0,
+                children: <Widget>[
+                  Image.asset('assets/images/coffeePlaceholder.jpg'),
+                ],
+              ),
+            ),
             Divider(color: Colors.black),
             RatingBar.builder(
               initialRating: 3,
