@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
+import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 import 'package:the_coffe_collection/utils/shared_preferences.dart';
 
 import '../components/CoffeeSearchCard.dart';
@@ -6,21 +9,19 @@ import 'landing_page.dart';
 
 SharedPreference prefer = new SharedPreference();
 
-class ActivityView extends StatefulWidget {
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<ActivityView> {
+class ActivityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff49281A),
-          title: const Text('Main activity'),
+    return BlocProvider(
+      create: (BuildContext context) => CoffeeBloc(
+        coffeeRepository: RepositoryProvider.of<CoffeeRepository>(context),
+      )..add(FetchCoffees()),
+      child: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [Flexible(child: CoffeeSearchCard())],
         ),
-        body: CoffeeSearchCard(),
       ),
     );
   }

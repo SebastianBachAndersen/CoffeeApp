@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_coffe_collection/Pages/authenticated_page.dart';
 import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dart';
 import 'package:the_coffe_collection/components/custom_colors.dart';
+import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 import 'package:the_coffe_collection/repositories/user_repository.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -41,6 +42,8 @@ class MyApps extends StatelessWidget {
         RepositoryProvider<UserRepository>(
           create: (context) => UserRepository(),
         ),
+        RepositoryProvider<CoffeeRepository>(
+            create: (context) => CoffeeRepository())
       ],
       child: BlocProvider(
         create: (context) {
