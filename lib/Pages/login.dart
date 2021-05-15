@@ -62,23 +62,28 @@ class _LoginFormState extends State<LoginPage> {
                         child: ConstrainedBox(
                             constraints: BoxConstraints(maxHeight: height),
                             child: SafeArea(
-                                child: Column(children: <Widget>[
-                              _usernamePasswordWidget(),
-                              BlocBuilder<LoginBloc, LoginState>(
-                                builder: (context, state) {
-                                  return StyledRaisedButton(context,
-                                      text: 'Log ind',
-                                      loading: state is LoginLoading,
-                                      padding: 16, callback: () {
-                                    BlocProvider.of<LoginBloc>(context).add(
-                                      LoginUser(
-                                          identifier: _emailController.text,
-                                          password: _passwordController.text),
-                                    );
-                                  });
-                                },
-                              ),
-                            ])))))
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                  _usernamePasswordWidget(),
+                                  BlocBuilder<LoginBloc, LoginState>(
+                                    builder: (context, state) {
+                                      return StyledRaisedButton(context,
+                                          text: 'Log ind',
+                                          loading: state is LoginLoading,
+                                          padding: 16, callback: () {
+                                        BlocProvider.of<LoginBloc>(context).add(
+                                          LoginUser(
+                                              identifier: _emailController.text,
+                                              password:
+                                                  _passwordController.text),
+                                        );
+                                      });
+                                    },
+                                  ),
+                                ])))))
               ],
             ),
           ),

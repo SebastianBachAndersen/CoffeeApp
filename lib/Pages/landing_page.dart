@@ -24,7 +24,14 @@ class LandingPage extends StatelessWidget {
           return LoginRoute();
         }
 
-        return LoginRoute();
+        return Material(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text("bruh")],
+            ),
+          ),
+        );
       }),
     );
   }

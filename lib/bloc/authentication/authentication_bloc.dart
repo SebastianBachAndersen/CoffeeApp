@@ -24,7 +24,7 @@ class AuthenticationBloc
     if (event is AppStarted) {
       try {
         final bool loggedIn = await userRepository.verifyUserLoggedIn();
-        if (loggedIn) {
+        if (!loggedIn) {
           var currentUser = await userRepository.getAuthenticatedUser();
           yield AuthenticationAuthenticated(user: currentUser);
         }
