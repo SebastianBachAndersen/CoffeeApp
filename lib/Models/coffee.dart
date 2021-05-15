@@ -27,7 +27,7 @@ class Coffee {
     id = json['id'];
     name = json['name'];
     date = DateTime.tryParse(json['date']);
-    genreName = json['genre'];
+    genreName = json['genreName'];
     coffeeCompanyId = json['coffeeCompanyId'];
     coffeeCompanyName = json['coffeeCompanyName'];
     averageRating = json['averageRating'].toDouble();
