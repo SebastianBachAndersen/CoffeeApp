@@ -1,4 +1,1 @@
-enum ServingStyle {
-  arabica,
-  americano,
-}
+enum ServingStyle { esprasso, americano, latte, coldbrew }

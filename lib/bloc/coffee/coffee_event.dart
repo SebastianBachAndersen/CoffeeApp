@@ -31,7 +31,7 @@ class CreateCofee extends CoffeeEvent {
 }
 
 class CreateCoffeeRating extends CoffeeEvent {
-  final int rating;
+  final double rating;
   final DateTime date;
   final String comment;
   final String location;

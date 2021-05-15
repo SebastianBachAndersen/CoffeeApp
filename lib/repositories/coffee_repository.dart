@@ -27,7 +27,7 @@ class CoffeeRepository {
     return Coffee.fromJson(response);
   }
 
-  Future<CoffeeRating> rateCoffee(int rating, DateTime date, String comment,
+  Future<CoffeeRating> rateCoffee(double rating, DateTime date, String comment,
       String location, String coffeeId, ServingStyle servingStyle) async {
     Map<String, dynamic> data = {
       'rating': rating.toString(),
