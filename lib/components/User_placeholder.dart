@@ -3,6 +3,7 @@ import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class User_placeholder extends StatelessWidget {
+  String username;
   User_placeholder({
     Key key,
   }) : super(key: key);
@@ -88,10 +89,10 @@ class User_placeholder extends StatelessWidget {
                 ),
               ),
               Pinned.fromPins(
-                Pin(size: 98.0, middle: 0.4881),
+                Pin(size: 100.0, middle: 0.4881),
                 Pin(size: 30.0, end: 6.0),
                 child: Text(
-                  'Username',
+                  username ?? "placeholder",
                   style: TextStyle(
                     fontFamily: 'Segoe UI',
                     fontSize: 22,
@@ -101,7 +102,7 @@ class User_placeholder extends StatelessWidget {
                 ),
               ),
               Pinned.fromPins(
-                Pin(size: 54.0, start: 61.5),
+                Pin(size: 60.0, start: 54),
                 Pin(size: 16.0, middle: 0.6429),
                 child: Text(
                   'Check-ins',
@@ -115,8 +116,8 @@ class User_placeholder extends StatelessWidget {
                 ),
               ),
               Pinned.fromPins(
-                Pin(size: 84.0, end: 45.5),
-                Pin(size: 16.0, middle: 0.6429),
+                Pin(size: 84.0, end: 30),
+                Pin(size: 20.0, middle: 0.6429),
                 child: Text(
                   'types of coffee',
                   style: TextStyle(
