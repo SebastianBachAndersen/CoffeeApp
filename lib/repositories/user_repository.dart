@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_coffe_collection/Models/login_result.dart';
 import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/networking/api_provider.dart';
@@ -17,7 +18,9 @@ class UserRepository {
   Future<User> login(String identifier, String password) async {
     Map<String, dynamic> data = {'Email': identifier, 'Password': password};
     SharedPreference token = new SharedPreference();
+    SharedPreferences pref = await SharedPreferences.getInstance();
     final response = await _provider.post('Login', jsonBody: data);
+    await pref.clear();
     await token.save(response['token']);
     print(await token.read());
     return User.fromJson(response['user']);

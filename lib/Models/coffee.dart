@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:equatable/equatable.dart';
 import 'package:the_coffe_collection/enums/genre_enum.dart';
 
@@ -7,30 +9,28 @@ class Coffee {
   String id;
   String name;
   DateTime date;
-  Genre genre;
+  String genreName;
   String coffeeCompanyId;
-  List<CoffeeRating> coffeeRating;
+  String coffeeCompanyName;
+  double averageRating;
 
   Coffee(
       {this.id,
       this.name,
       this.date,
-      this.genre,
+      this.genreName,
       this.coffeeCompanyId,
-      this.coffeeRating});
+      this.coffeeCompanyName,
+      this.averageRating});
 
   Coffee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     date = DateTime.tryParse(json['date']);
-    genre = Genre.values[json['genre']];
+    genreName = json['genre'];
     coffeeCompanyId = json['coffeeCompanyId'];
-    if (json['coffeeRating'] != null) {
-      coffeeRating = <CoffeeRating>[];
-      json['coffeeRating'].forEach((v) {
-        coffeeRating.add(new CoffeeRating.fromJson(v));
-      });
-    }
+    coffeeCompanyName = json['coffeeCompanyName'];
+    averageRating = json['averageRating'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
@@ -38,11 +38,10 @@ class Coffee {
     data['id'] = this.id;
     data['name'] = this.name;
     data['date'] = this.date.toIso8601String();
-    data['genre'] = this.genre.index;
+    data['genreName'] = this..genreName;
     data['coffeeCompanyId'] = this.coffeeCompanyId;
-    if (this.coffeeRating != null) {
-      data['coffeeRating'] = this.coffeeRating.map((v) => v.toJson()).toList();
-    }
+    data['coffeeCompanyName'] = this.coffeeCompanyName;
+    data['averageRating'] = this.averageRating;
     return data;
   }
 }
