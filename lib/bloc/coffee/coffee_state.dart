@@ -36,3 +36,18 @@ class CoffeeError extends CoffeeState {
 
   CoffeeError({@required this.reason});
 }
+
+class CoffeeRatingCreating extends CoffeeState {}
+
+class CoffeeRatingLoaded extends CoffeeState {
+  final CoffeeRating coffeeRating;
+
+  CoffeeRatingLoaded({
+    @required this.coffeeRating,
+  });
+}
+
+class CoffeeRatingCreated extends CoffeeRatingLoaded {
+  CoffeeRatingCreated({@required CoffeeRating coffeeRating})
+      : super(coffeeRating: coffeeRating);
+}

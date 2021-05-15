@@ -41,7 +41,7 @@ class Coffee {
     data['genreName'] = this..genreName;
     data['coffeeCompanyId'] = this.coffeeCompanyId;
     data['coffeeCompanyName'] = this.coffeeCompanyName;
-    data['averageRating'] = this.averageRating;
+    data['averageRating'] = this.averageRating.toString();
     return data;
   }
 }

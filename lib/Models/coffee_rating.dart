@@ -2,8 +2,8 @@ import 'package:the_coffe_collection/enums/serving_style.dart';
 
 class CoffeeRating {
   String id;
-  int rating;
-  String date;
+  double rating;
+  DateTime date;
   String comment;
   String location;
   String coffeeId;
@@ -20,8 +20,8 @@ class CoffeeRating {
 
   CoffeeRating.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    rating = json['rating'];
-    date = json['date'];
+    rating = json['rating'].toDouble();
+    date = DateTime.tryParse(json['date']);
     comment = json['comment'];
     location = json['location'];
     coffeeId = json['coffeeId'];
@@ -31,8 +31,8 @@ class CoffeeRating {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['rating'] = this.rating;
-    data['date'] = this.date;
+    data['rating'] = this.rating.toString();
+    data['date'] = this.date.toIso8601String();
     data['comment'] = this.comment;
     data['location'] = this.location;
     data['coffeeId'] = this.coffeeId;
