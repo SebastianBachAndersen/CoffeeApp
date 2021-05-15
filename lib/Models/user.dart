@@ -17,20 +17,20 @@ class User extends Equatable {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        id: json['Id'],
-        firstName: json['FirstName'],
-        lastName: json['Lastname'],
-        email: json['Email'],
-        password: json['Password']);
+        id: json['id'],
+        firstName: json['firstName'],
+        lastName: json['lastname'],
+        email: json['email'],
+        password: json['password']);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map();
-    data['Id'] = this.id;
-    data['FirstName'] = this.firstName;
-    data['LastName'] = this.lastName;
-    data['Email'] = this.email;
-    data['Password'] = this.password;
+    data['id'] = this.id;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
+    data['email'] = this.email;
+    data['password'] = this.password;
 
     return data;
   }

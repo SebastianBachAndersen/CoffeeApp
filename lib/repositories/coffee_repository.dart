@@ -8,7 +8,7 @@ class CoffeeRepository {
   ApiProvider _provider = ApiProvider();
 
   Future<List<Coffee>> getCoffees() async {
-    var response = await _provider.get('CoffeeController');
+    var response = await _provider.get('CoffeeContoller');
 
     return List.from(response.map((coffee) => Coffee.fromJson(coffee)));
   }
@@ -21,7 +21,7 @@ class CoffeeRepository {
       'Genre': genre.index,
       'CoffeeCompanyId': coffeeCompanyId
     };
-    final response = await _provider.post('CoffeeController', jsonBody: data);
+    final response = await _provider.post('CoffeeContoller', jsonBody: data);
     return Coffee.fromJson(response);
   }
 }
