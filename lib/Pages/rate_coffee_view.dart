@@ -94,6 +94,7 @@ class _State extends State<RateCoffeeView> {
                   direction: Axis.horizontal,
                   allowHalfRating: true,
                   itemCount: 5,
+                  updateOnDrag: true,
                   itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                   itemBuilder: (context, _) => Icon(
                     Icons.star,
