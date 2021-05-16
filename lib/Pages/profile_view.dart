@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_coffe_collection/Pages/friends_view.dart';
 import 'package:the_coffe_collection/Pages/settings.dart';
@@ -50,12 +51,118 @@ class _State extends State<ProfileView> {
                 }),
           ],
         ),
-        body: Column(
+        body: ListView(
           children: [
             Container(
               height: 210,
               child: User_placeholder(), //der skal noget ind her
             ),
+            Container(
+              color: Colors.brown,
+              child: Card(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Image(
+                            width: 50,
+                            height: 50,
+                            image: AssetImage(
+                                "assets/images/Placeholder_profilePic.png"),
+                          ),
+                        ),
+                        Text(
+                          "username",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xffAB6832),
+                            height: 1,
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.brown)),
+                      margin: new EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 100,
+                                child: Image(
+                                  width: 150,
+                                  height: 150,
+                                  image: AssetImage(
+                                      "assets/images/coffeePlaceholder.png"),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "Coffee Name",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xffAB6832),
+                                      height: 1,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Coffee Name",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xffAB6832),
+                                      height: 1,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Coffee Name",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xffAB6832),
+                                      height: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: new EdgeInsets.only(
+                                left: 60.0, top: 20, bottom: 20),
+                            child: Row(
+                              children: [
+                                RatingBar.builder(
+                                  initialRating: 0,
+                                  minRating: 0,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  ignoreGestures: true,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 4.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    setState(() {});
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
