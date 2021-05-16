@@ -7,6 +7,7 @@ import 'package:the_coffe_collection/Pages/friends_view.dart';
 import 'package:the_coffe_collection/Pages/settings.dart';
 import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dart';
 import 'package:the_coffe_collection/components/User_placeholder.dart';
+import 'package:the_coffe_collection/repositories/user_repository.dart';
 import 'package:the_coffe_collection/utils/shared_preferences.dart';
 
 import '../components/User_placeholder.dart';
@@ -22,43 +23,43 @@ class _State extends State<ProfileView> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff49281A),
-          title: const Text('Mine profile'),
-          actions: [
-            IconButton(
-                icon: const Icon(Icons.people),
-                tooltip: 'Show Snackbar',
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FriendsView()));
-                }),
-            IconButton(
-                icon: const Icon(Icons.settings),
-                tooltip: 'Show Snackbar',
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Settings()));
-                }),
-            IconButton(
-                icon: const Icon(Icons.logout),
-                tooltip: 'Show Snackbar',
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => logoutDialog(context));
-                }),
-          ],
-        ),
-        body: Column(
-          children: [
-            Container(
-              height: 210,
-              child: User_placeholder(), //der skal noget ind her
-            ),
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            backgroundColor: Color(0xff49281A),
+            title: const Text('Mine profile'),
+            actions: [
+              IconButton(
+                  icon: const Icon(Icons.people),
+                  tooltip: 'Show Snackbar',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => FriendsView()));
+                  }),
+              IconButton(
+                  icon: const Icon(Icons.settings),
+                  tooltip: 'Show Snackbar',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Settings()));
+                  }),
+              IconButton(
+                  icon: const Icon(Icons.logout),
+                  tooltip: 'Show Snackbar',
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            logoutDialog(context));
+                  }),
+            ],
+          ),
+          body: BlocProvider(
+            create: (context) {
+              return AuthenticationBloc(
+                userRepository: RepositoryProvider.of<UserRepository>(context),
+              )..add(LoggedIn());
+            },
+            child: User_placeholder(),
+          )),
     );
   }
 }
