@@ -155,6 +155,32 @@ class _State extends State<ProfileView> {
                                 ),
                               ],
                             ),
+                          ),
+                          Container(
+                            margin: new EdgeInsets.only(left: 40.0, bottom: 20),
+                            child: Row(children: [
+                              Text(
+                                "User Commnent",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xffAB6832),
+                                  height: 1,
+                                ),
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            margin: new EdgeInsets.only(left: 60.0, bottom: 20),
+                            child: Row(children: [
+                              Text(
+                                "placeholder text",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xffAB6832),
+                                  height: 1,
+                                ),
+                              ),
+                            ]),
                           )
                         ],
                       ),
