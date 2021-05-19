@@ -11,7 +11,7 @@ class _State extends State<AddFriendsView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff49281A),
-        title: const Text('AddFriendsView'),
+        title: const Text('Add Friend'),
       ),
     );
   }

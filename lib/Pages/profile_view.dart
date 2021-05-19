@@ -27,7 +27,7 @@ class _State extends State<ProfileView> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xff49281A),
-          title: const Text('Mine profile'),
+          title: const Text('My profile'),
           actions: [
             IconButton(
                 icon: const Icon(Icons.people),

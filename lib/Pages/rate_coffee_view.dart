@@ -155,7 +155,7 @@ class _State extends State<RateCoffeeView> {
             Container(
               margin: new EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                "Kommentar",
+                "Comment",
                 style: TextStyle(
                   fontSize: 20,
                   color: Color(0xffAB6832),
@@ -174,7 +174,7 @@ class _State extends State<RateCoffeeView> {
               builder: (context, state) {
                 return StyledRaisedButton(context,
                     color: Color(0xff49281A),
-                    text: 'Send Ratring',
+                    text: 'Save Rating',
                     loading: state is CoffeeRatingCreating,
                     padding: 16, callback: () {
                   BlocProvider.of<CoffeeBloc>(context).add(

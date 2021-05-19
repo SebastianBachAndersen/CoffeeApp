@@ -20,15 +20,15 @@ class _State extends State<AuthenticatedPage> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.menu_sharp),
-              label: 'Activity',
+              label: 'Coffee',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              label: 'Søg',
+              label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
-              label: 'min profil',
+              label: 'My Profile',
             ),
           ],
           currentIndex: _selectedIndex,
