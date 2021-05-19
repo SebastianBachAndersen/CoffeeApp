@@ -1,1 +1,1 @@
-enum ServingStyle { esprasso, americano, latte, coldbrew }
+enum ServingStyle { espresso, americano, latte, coldbrew }
