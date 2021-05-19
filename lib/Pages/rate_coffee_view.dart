@@ -173,6 +173,7 @@ class _State extends State<RateCoffeeView> {
                       servingStyle: coffeeSeveringType(),
                     ),
                   );
+                  Navigator.pop(context);
                 });
               },
             ),
@@ -192,11 +193,11 @@ class _State extends State<RateCoffeeView> {
     } else if (_selected4 == true) {
       return ServingStyle.coldbrew;
     } else {
-      return null;
+      return ServingStyle.americano;
     }
   }
 
-  bool _selected1 = false;
+  bool _selected1 = true;
   bool _selected2 = false;
   bool _selected3 = false;
   bool _selected4 = false;

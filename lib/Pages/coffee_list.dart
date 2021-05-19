@@ -62,7 +62,11 @@ Widget coffeeSearchCard(Coffee coffee, BuildContext context) {
             ),
             title: Text(coffee.name ?? "Coffee name"), //der skal noget ind her!
             subtitle: Text(coffee.coffeeCompanyName ?? "Company name"),
-            trailing: Text(coffee.averageRating.toString() ?? "Rating"),
+            trailing: Text(
+              double.parse((coffee.averageRating).toStringAsFixed(2))
+                      .toString() ??
+                  "Rating",
+            ),
           ),
         ],
       ),
