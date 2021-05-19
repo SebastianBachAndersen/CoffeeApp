@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_coffe_collection/Pages/add_friends_view.dart';
 
-import 'landing_page.dart';
-
 class FriendsView extends StatefulWidget {
   @override
   _State createState() => _State();

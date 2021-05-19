@@ -1,10 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:the_coffe_collection/Models/coffee.dart';
 import 'package:the_coffe_collection/Models/coffee_rating.dart';
 import 'package:the_coffe_collection/Models/user.dart';
-import 'package:the_coffe_collection/enums/genre_enum.dart';
 import 'package:the_coffe_collection/enums/serving_style.dart';
-import 'package:the_coffe_collection/networking/api_provider.dart';
 import 'package:the_coffe_collection/networking/api_provider.dart';
 
 class CoffeeRepository {

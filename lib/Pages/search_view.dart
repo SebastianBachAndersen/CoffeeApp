@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
 import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 
-import 'landing_page.dart';
-
 class SearchView extends StatefulWidget {
   @override
   _State createState() => _State();

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'landing_page.dart';
-
 class Settings extends StatefulWidget {
   @override
   _State createState() => _State();

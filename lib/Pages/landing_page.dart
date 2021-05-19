@@ -4,8 +4,6 @@ import 'package:the_coffe_collection/Pages/authenticated_page.dart';
 import 'package:the_coffe_collection/Pages/login_route.dart';
 import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dart';
 
-import 'login.dart';
-
 class LandingPage extends StatelessWidget {
   LandingPage({Key key}) : super(key: key);
 

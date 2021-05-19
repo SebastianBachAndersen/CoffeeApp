@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -34,17 +35,29 @@ class _State extends State<RateCoffeeView> {
                 Container(
                   margin: new EdgeInsets.symmetric(horizontal: 20.0),
                   width: 100,
-                  child: Image(
-                    image: AssetImage("assets/images/coffeePlaceholder.png"),
+                  child: new Container(
+                    child: CachedNetworkImage(
+                      imageUrl: widget.coffee.imageLink,
+                      placeholder: (context, url) => Image(
+                        image:
+                            AssetImage("assets/images/coffeePlaceholder.png"),
+                      ),
+                      errorWidget: (context, url, error) => Image(
+                        image:
+                            AssetImage("assets/images/coffeePlaceholder.png"),
+                      ),
+                    ),
                   ),
                 ),
                 Container(
                   margin: new EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         widget.coffee.name ?? "default",
+                        softWrap: true,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -60,7 +73,7 @@ class _State extends State<RateCoffeeView> {
                         ),
                       ),
                       Text(
-                        widget.coffee.coffeeCompanyName ?? "default",
+                        widget.coffee.genreName ?? "default",
                         style:
                             TextStyle(fontSize: 16, color: Color(0xffAB6832)),
                       )

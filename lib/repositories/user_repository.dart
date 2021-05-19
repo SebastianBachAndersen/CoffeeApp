@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:the_coffe_collection/Models/error_message.dart';
-import 'package:the_coffe_collection/Models/login_result.dart';
 import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/networking/api_provider.dart';
 import 'package:the_coffe_collection/utils/shared_preferences.dart';
