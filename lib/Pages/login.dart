@@ -39,52 +39,65 @@ class _LoginFormState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/coffee.jpeg"), fit: BoxFit.cover)),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text(
-              "The Coffee collection",
-              style: TextStyle(color: CustomColors.secondaryColor),
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginError) {
+          final snackBar = SnackBar(
+            content: Text('Invalid login credentials'),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      },
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("images/coffee.jpeg"), fit: BoxFit.cover)),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              title: Text(
+                "The Coffee collection",
+                style: TextStyle(color: CustomColors.secondaryColor),
+              ),
             ),
-          ),
-          body: Container(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                    height: height,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: SingleChildScrollView(
-                        child: ConstrainedBox(
-                            constraints: BoxConstraints(maxHeight: height),
-                            child: SafeArea(
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                  _usernamePasswordWidget(),
-                                  BlocBuilder<LoginBloc, LoginState>(
-                                    builder: (context, state) {
-                                      return StyledRaisedButton(context,
-                                          text: 'Log ind',
-                                          loading: state is LoginLoading,
-                                          padding: 16, callback: () {
-                                        BlocProvider.of<LoginBloc>(context).add(
-                                          LoginUser(
-                                              identifier: _emailController.text,
-                                              password:
-                                                  _passwordController.text),
-                                        );
-                                      });
-                                    },
-                                  ),
-                                ])))))
-              ],
+            body: Container(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                      height: height,
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                          child: ConstrainedBox(
+                              constraints: BoxConstraints(maxHeight: height),
+                              child: SafeArea(
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                    _usernamePasswordWidget(),
+                                    BlocBuilder<LoginBloc, LoginState>(
+                                      builder: (context, state) {
+                                        return StyledRaisedButton(context,
+                                            text: 'Log ind',
+                                            loading: state is LoginLoading,
+                                            padding: 16, callback: () {
+                                          BlocProvider.of<LoginBloc>(context)
+                                              .add(
+                                            LoginUser(
+                                                identifier:
+                                                    _emailController.text,
+                                                password:
+                                                    _passwordController.text),
+                                          );
+                                        });
+                                      },
+                                    ),
+                                  ])))))
+                ],
+              ),
             ),
           ),
         ),

@@ -10,13 +10,8 @@ class DioClient {
     if (_instance != null) {
       return _instance;
     }
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.getString(key) ?? "";
 
     _instance = Dio();
-
-    _instance.options.headers["authorization"] = "Bearer $value";
 
     return _instance;
   }

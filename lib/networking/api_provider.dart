@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import 'package:the_coffe_collection/utils/dio_client.dart';
@@ -18,14 +19,15 @@ class ApiProvider {
     } else {
       fullUrl = _baseUrl + url;
     }
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.getString(key) ?? "";
+    _httpClient.options.headers["authorization"] = "Bearer $value";
 
-    final response = await _httpClient.get(fullUrl,
-        queryParameters: queryParams,
-        options: Options(
-            followRedirects: false,
-            validateStatus: (status) {
-              return status < 500;
-            }));
+    final response = await _httpClient.get(
+      fullUrl,
+      queryParameters: queryParams,
+    );
 
     return response.data;
   }
@@ -40,6 +42,10 @@ class ApiProvider {
     } else {
       fullUrl = _baseUrl + url;
     }
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.getString(key) ?? "";
+    _httpClient.options.headers["authorization"] = "Bearer $value";
 
     dynamic body;
 
@@ -53,8 +59,7 @@ class ApiProvider {
         options: Options(validateStatus: (status) {
       return status < 500;
     }));
-
-    return response.data;
+    return response;
   }
 
   Future<dynamic> put(String url,
@@ -67,6 +72,10 @@ class ApiProvider {
     } else {
       fullUrl = _baseUrl + url;
     }
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.getString(key) ?? "";
+    _httpClient.options.headers["authorization"] = "Bearer $value";
 
     String encodedBody = json.encode(jsonBody);
 
@@ -95,6 +104,10 @@ class ApiProvider {
     } else {
       fullUrl = _baseUrl + url;
     }
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.getString(key) ?? "";
+    _httpClient.options.headers["authorization"] = "Bearer $value";
 
     final response = await _httpClient.delete(fullUrl,
         options: Options(validateStatus: (status) {
