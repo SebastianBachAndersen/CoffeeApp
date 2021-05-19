@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
+import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 
 import 'landing_page.dart';
 
@@ -29,26 +32,7 @@ class ListSearch extends StatefulWidget {
 class ListSearchState extends State<ListSearch> {
   TextEditingController _textController = TextEditingController();
 
-  static List<String> mainDataList = [
-    "Apple",
-    "Apricot",
-    "Banana",
-    "Blackberry",
-    "Coconut",
-    "Date",
-    "Fig",
-    "Gooseberry",
-    "Grapes",
-    "Lemon",
-    "Litchi",
-    "Mango",
-    "Orange",
-    "Papaya",
-    "Peach",
-    "Pineapple",
-    "Pomegranate",
-    "Starfruit"
-  ];
+  static List<String> mainDataList = [];
 
   // Copy Main List into New List.
   List<String> newDataList = List.from(mainDataList);
@@ -64,32 +48,48 @@ class ListSearchState extends State<ListSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: 'Search Here...',
-              ),
-              onChanged: onItemChanged,
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(12.0),
-              children: newDataList.map((data) {
-                return ListTile(
-                  title: Text(data),
-                  onTap: () => print(data),
-                );
-              }).toList(),
-            ),
-          )
-        ],
+    return BlocProvider(
+      create: (BuildContext context) => CoffeeBloc(
+          coffeeRepository: RepositoryProvider.of<CoffeeRepository>(context))
+        ..add(FetchCoffees()),
+      child: BlocBuilder<CoffeeBloc, CoffeeState>(
+        builder: (context, state) {
+          if (state is CoffeeListLoaded) {
+            mainDataList
+                .addAll(state.coffees.map((coffee) => coffee.name).toList());
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextField(
+                    controller: _textController,
+                    decoration: InputDecoration(
+                      hintText: 'Search Here...',
+                    ),
+                    onChanged: onItemChanged,
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.all(12.0),
+                    children:
+                        newDataList.map((name) => coffeeNames(name)).toList(),
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Container(
+              decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+        },
       ),
     );
   }
+}
+
+Widget coffeeNames(String name) {
+  return ListTile(title: Text(name));
 }

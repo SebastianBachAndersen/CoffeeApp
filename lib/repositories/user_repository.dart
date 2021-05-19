@@ -21,9 +21,7 @@ class UserRepository {
   Future<Object> login(String identifier, String password) async {
     Map<String, dynamic> data = {'Email': identifier, 'Password': password};
     SharedPreference token = new SharedPreference();
-    SharedPreferences pref = await SharedPreferences.getInstance();
     final response = await _provider.post('Login', jsonBody: data);
-    await pref.clear();
     int status = response.statusCode;
     if (status == 200) {
       await token.save(response.data['token']);
