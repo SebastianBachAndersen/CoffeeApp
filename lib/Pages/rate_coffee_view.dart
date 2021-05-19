@@ -187,7 +187,7 @@ class _State extends State<RateCoffeeView> {
     if (_selected1 == true) {
       return ServingStyle.americano;
     } else if (_selected2 == true) {
-      return ServingStyle.esprasso;
+      return ServingStyle.espresso;
     } else if (_selected3 == true) {
       return ServingStyle.latte;
     } else if (_selected4 == true) {
