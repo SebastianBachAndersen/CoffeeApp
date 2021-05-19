@@ -7,180 +7,164 @@ import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dar
 import 'package:the_coffe_collection/bloc/login/login_bloc.dart';
 
 class User_placeholder extends StatelessWidget {
-  User_placeholder({
-    Key key,
-  }) : super(key: key);
+  User_placeholder({Key key, @required this.user}) : super(key: key);
+  final User user;
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        builder: (context, state) {
-      if (state is AuthenticationAuthenticated) {
-        return Stack(
-          children: <Widget>[
-            Pinned.fromPins(
-              Pin(start: 0.0, end: 0.0),
-              Pin(size: 212.0, middle: 0.5),
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromPins(
-                    Pin(size: 393.0, middle: 0.3875),
-                    Pin(size: 112.0, start: 0.0),
-                    child: SingleChildScrollView(
-                      child: SizedBox(
-                        width: 393.0,
-                        height: 262.0,
-                        child: Stack(
-                          children: <Widget>[
-                            Pinned.fromPins(
-                              Pin(startFraction: 0.0, endFraction: 0.0),
-                              Pin(startFraction: 0.0, endFraction: -1.3393),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: const AssetImage(
-                                        'assets/images/Bc_image_profile.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
+    return Stack(
+      children: <Widget>[
+        Pinned.fromPins(
+          Pin(start: 0.0, end: 0.0),
+          Pin(size: 212.0, middle: 0.5),
+          child: Stack(
+            children: <Widget>[
+              Pinned.fromPins(
+                Pin(size: 393.0, middle: 0.3875),
+                Pin(size: 112.0, start: 0.0),
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    width: 393.0,
+                    height: 262.0,
+                    child: Stack(
+                      children: <Widget>[
+                        Pinned.fromPins(
+                          Pin(startFraction: 0.0, endFraction: 0.0),
+                          Pin(startFraction: 0.0, endFraction: -1.3393),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: const AssetImage(
+                                    'assets/images/Bc_image_profile.png'),
+                                fit: BoxFit.fill,
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                  Pinned.fromPins(
-                    Pin(start: 15.5, end: 24.5),
-                    Pin(size: 98.0, end: 0.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xfffbfbfb),
-                      ),
-                    ),
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(start: 15.5, end: 24.5),
+                Pin(size: 98.0, end: 0.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xfffbfbfb),
                   ),
-                  Pinned.fromPins(
-                    Pin(start: 0.0, end: 0.0),
-                    Pin(size: 1.0, middle: 0.5332),
-                    child: SvgPicture.string(
-                      _svg_lyip41,
-                      allowDrawingOutsideViewBox: true,
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(start: 0.0, end: 0.0),
+                Pin(size: 1.0, middle: 0.5332),
+                child: SvgPicture.string(
+                  _svg_lyip41,
+                  allowDrawingOutsideViewBox: true,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(size: 120.0, middle: 0.4952),
+                Pin(size: 120.0, middle: 0.5652),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                    color: const Color(0xffffffff),
+                    border:
+                        Border.all(width: 1.0, color: const Color(0xff707070)),
+                  ),
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(size: 113.0, middle: 0.4969),
+                Pin(size: 113.0, middle: 0.5657),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(200.0),
+                    image: DecorationImage(
+                      image: const AssetImage(
+                          'assets/images/Placeholder_profilePic.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
-                  Pinned.fromPins(
-                    Pin(size: 120.0, middle: 0.4952),
-                    Pin(size: 120.0, middle: 0.5652),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
-                        color: const Color(0xffffffff),
-                        border: Border.all(
-                            width: 1.0, color: const Color(0xff707070)),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 113.0, middle: 0.4969),
-                    Pin(size: 113.0, middle: 0.5657),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(200.0),
-                        image: DecorationImage(
-                          image: const AssetImage(
-                              'assets/images/Placeholder_profilePic.png'),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 100.0, middle: 0.4881),
-                    Pin(size: 30.0, end: 6.0),
-                    child: Text(
-                      (state.user.firstName ?? "") +
-                          (state.user.lastName ?? ""),
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 22,
-                        color: const Color(0xffab6832),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 60.0, start: 54),
-                    Pin(size: 16.0, middle: 0.6429),
-                    child: Text(
-                      'Check-ins',
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 12,
-                        color: const Color(0xffab6832),
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 84.0, end: 30),
-                    Pin(size: 20.0, middle: 0.6429),
-                    child: Text(
-                      'types of coffee',
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 12,
-                        color: const Color(0xffab6832),
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 28.0, middle: 0.184),
-                    Pin(size: 32.0, middle: 0.8),
-                    child: Text(
-                      '54',
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 24,
-                        color: const Color(0xffab6832),
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 28.0, middle: 0.8185),
-                    Pin(size: 32.0, middle: 0.8),
-                    child: Text(
-                      '64',
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 24,
-                        color: const Color(0xffab6832),
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
-        );
-      } else if (state is AuthenticationLoading) {
-        return Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
-          child: Center(child: CircularProgressIndicator()),
-        );
-      } else {
-        return Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
-          child: Center(child: CircularProgressIndicator()),
-        );
-      }
-    });
+              Pinned.fromPins(
+                Pin(size: 100.0, middle: 0.4881),
+                Pin(size: 30.0, end: 6.0),
+                child: Text(
+                  (user.firstName ?? "") + (user.lastName ?? ""),
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 22,
+                    color: const Color(0xffab6832),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(size: 60.0, start: 54),
+                Pin(size: 16.0, middle: 0.6429),
+                child: Text(
+                  'Check-ins',
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 12,
+                    color: const Color(0xffab6832),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(size: 84.0, end: 30),
+                Pin(size: 20.0, middle: 0.6429),
+                child: Text(
+                  'types of coffee',
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 12,
+                    color: const Color(0xffab6832),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(size: 28.0, middle: 0.184),
+                Pin(size: 32.0, middle: 0.8),
+                child: Text(
+                  user.numberOfRatings.toString() ?? "0",
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 24,
+                    color: const Color(0xffab6832),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Pinned.fromPins(
+                Pin(size: 28.0, middle: 0.8185),
+                Pin(size: 32.0, middle: 0.8),
+                child: Text(
+                  user.numberOfTypesRated.toString() ?? "0",
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI',
+                    fontSize: 24,
+                    color: const Color(0xffab6832),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 

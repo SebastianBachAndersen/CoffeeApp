@@ -160,6 +160,7 @@ class _State extends State<RateCoffeeView> {
             BlocBuilder<CoffeeBloc, CoffeeState>(
               builder: (context, state) {
                 return StyledRaisedButton(context,
+                    color: Color(0xff49281A),
                     text: 'Send Ratring',
                     loading: state is CoffeeRatingCreating,
                     padding: 16, callback: () {

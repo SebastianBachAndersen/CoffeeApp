@@ -70,7 +70,9 @@ class _State extends State<ProfileView> {
                 return Container(
                   child: ListView(
                     children: [
-                      Container(height: 210, child: User_placeholder()),
+                      Container(
+                          height: 210,
+                          child: User_placeholder(user: state.user)),
                       ...state.user.coffeeRatings
                           .map<Widget>((coffeeRating) =>
                               ratingCard(coffeeRating, state.user.firstName))
