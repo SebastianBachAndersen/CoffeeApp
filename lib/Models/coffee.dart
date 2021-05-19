@@ -1,10 +1,3 @@
-import 'dart:ffi';
-
-import 'package:equatable/equatable.dart';
-import 'package:the_coffe_collection/enums/genre_enum.dart';
-
-import 'coffee_rating.dart';
-
 class Coffee {
   String id;
   String name;

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:the_coffe_collection/Pages/activity_view.dart';
 import 'package:the_coffe_collection/Pages/profile_view.dart';
 import 'package:the_coffe_collection/Pages/search_view.dart';
-import 'package:the_coffe_collection/utils/shared_preferences.dart';
-
-import 'landing_page.dart';
 
 class AuthenticatedPage extends StatefulWidget {
   @override

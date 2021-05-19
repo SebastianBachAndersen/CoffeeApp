@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:the_coffe_collection/Models/coffee_rating.dart';
-import 'package:the_coffe_collection/enums/serving_style.dart';
 
 Widget userRatingCard(CoffeeRating coffeeRating, String name) {
   return Container(

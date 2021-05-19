@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_coffe_collection/Models/coffee.dart';
 import 'package:the_coffe_collection/Pages/rate_coffee_route.dart';
-import 'package:the_coffe_collection/Pages/rate_coffee_view.dart';
 import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
 
 class CoffeeList extends StatelessWidget {
@@ -56,9 +56,18 @@ Widget coffeeSearchCard(Coffee coffee, BuildContext context) {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Image(
-              image: AssetImage("assets/images/coffeePlaceholder.png"),
-              fit: BoxFit.cover,
+            leading: CachedNetworkImage(
+              imageUrl: coffee.imageLink,
+              width: 60,
+              fit: BoxFit.contain,
+              placeholder: (context, url) => Image(
+                image: AssetImage("assets/images/coffeePlaceholder.png"),
+                width: 60,
+              ),
+              errorWidget: (context, url, error) => Image(
+                width: 60,
+                image: AssetImage("assets/images/coffeePlaceholder.png"),
+              ),
             ),
             title: Text(coffee.name ?? "Coffee name"), //der skal noget ind her!
             subtitle: Text(coffee.coffeeCompanyName ?? "Company name"),

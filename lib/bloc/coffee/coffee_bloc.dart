@@ -6,7 +6,6 @@ import 'package:the_coffe_collection/Models/coffee.dart';
 import 'package:the_coffe_collection/Models/coffee_rating.dart';
 import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/enums/generic_api_error_reason.dart';
-import 'package:the_coffe_collection/enums/genre_enum.dart';
 import 'package:the_coffe_collection/enums/serving_style.dart';
 import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 

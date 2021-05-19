@@ -1,22 +1,16 @@
-import 'dart:developer';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_coffe_collection/Models/coffee_rating.dart';
-import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/Pages/friends_view.dart';
 import 'package:the_coffe_collection/Pages/settings.dart';
 import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dart';
 import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
 import 'package:the_coffe_collection/components/User_placeholder.dart';
-import 'package:the_coffe_collection/components/user_coffee_rating_card.dart';
-import 'package:the_coffe_collection/enums/serving_style.dart';
 import 'package:the_coffe_collection/repositories/coffee_repository.dart';
-import 'package:the_coffe_collection/repositories/user_repository.dart';
-import 'package:the_coffe_collection/utils/shared_preferences.dart';
 
 import '../components/User_placeholder.dart';
 import 'landing_page.dart';
@@ -74,8 +68,10 @@ class _State extends State<ProfileView> {
                           height: 210,
                           child: User_placeholder(user: state.user)),
                       ...state.user.coffeeRatings
-                          .map<Widget>((coffeeRating) =>
-                              ratingCard(coffeeRating, state.user.firstName))
+                          .map<Widget>((coffeeRating) => ratingCard(
+                                coffeeRating,
+                                state.user.firstName,
+                              ))
                           .toList()
                     ],
                   ),
@@ -138,29 +134,44 @@ Widget ratingCard(CoffeeRating coffeeRating, String name) {
                   children: [
                     Container(
                       width: 100,
-                      child: Image(
-                        width: 150,
+                      child: CachedNetworkImage(
+                        imageUrl: coffeeRating.imageLink,
+                        width: 100,
                         height: 150,
-                        image:
-                            AssetImage("assets/images/coffeePlaceholder.png"),
+                        placeholder: (context, url) => Image(
+                          image:
+                              AssetImage("assets/images/coffeePlaceholder.png"),
+                        ),
+                        errorWidget: (context, url, error) => Image(
+                          image:
+                              AssetImage("assets/images/coffeePlaceholder.png"),
+                        ),
                       ),
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          coffeeRating.coffeeName ?? "Coffee Name",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color(0xffAB6832),
-                            height: 1,
+                        Container(
+                          margin: new EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                            coffeeRating.coffeeName ?? "Coffee Name",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color(0xffAB6832),
+                              height: 1,
+                            ),
                           ),
                         ),
-                        Text(
-                          coffeeRating.coffeeCompanyName ?? "Coffee Name",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color(0xffAB6832),
-                            height: 1,
+                        Container(
+                          margin: new EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            coffeeRating.coffeeCompanyName ?? "Coffee Name",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xffAB6832),
+                              height: 1,
+                            ),
                           ),
                         ),
                         Text(
@@ -169,7 +180,7 @@ Widget ratingCard(CoffeeRating coffeeRating, String name) {
                                   camelCase: true) ??
                               "Coffee Name",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             color: Color(0xffAB6832),
                             height: 1,
                           ),

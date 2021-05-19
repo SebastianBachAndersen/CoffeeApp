@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:the_coffe_collection/Models/user.dart';
-import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dart';
-import 'package:the_coffe_collection/bloc/login/login_bloc.dart';
 
 class User_placeholder extends StatelessWidget {
   User_placeholder({Key key, @required this.user}) : super(key: key);

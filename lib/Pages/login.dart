@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_coffe_collection/bloc/login/login_bloc.dart';
-import 'package:the_coffe_collection/components/checkbox.dart';
 import 'package:the_coffe_collection/components/custom_colors.dart';
 import 'package:the_coffe_collection/components/raised_button.dart';
 import 'package:the_coffe_collection/components/text_field.dart';
