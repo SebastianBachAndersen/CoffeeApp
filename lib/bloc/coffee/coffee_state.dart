@@ -51,3 +51,10 @@ class CoffeeRatingCreated extends CoffeeRatingLoaded {
   CoffeeRatingCreated({@required CoffeeRating coffeeRating})
       : super(coffeeRating: coffeeRating);
 }
+
+class UserCoffeeRatingsLoading extends CoffeeState {}
+
+class UserCoffeeRatingsLoaded extends UserCoffeeRatingsLoading {
+  final User user;
+  UserCoffeeRatingsLoaded({@required this.user});
+}

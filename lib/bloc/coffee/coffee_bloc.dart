@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_coffe_collection/Models/coffee.dart';
 import 'package:the_coffe_collection/Models/coffee_rating.dart';
+import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/enums/generic_api_error_reason.dart';
 import 'package:the_coffe_collection/enums/genre_enum.dart';
 import 'package:the_coffe_collection/enums/serving_style.dart';
@@ -65,6 +66,22 @@ class CoffeeBloc extends Bloc<CoffeeEvent, CoffeeState> {
             event.coffeeId,
             event.servingStyle);
         yield CoffeeRatingCreated(coffeeRating: coffeeRating);
+      } on DioError catch (error) {
+        if (error.type != DioErrorType.response) {
+          yield CoffeeError(reason: GenericApiErrorReason.noConnection);
+        }
+
+        if (error.response.statusCode == 401) {
+          yield CoffeeError(reason: GenericApiErrorReason.unauthorized);
+        }
+      }
+    }
+    if (event is FetchUserRatings) {
+      yield UserCoffeeRatingsLoading();
+
+      try {
+        User userRatings = await coffeeRepository.getUserRatings();
+        yield UserCoffeeRatingsLoaded(user: userRatings);
       } on DioError catch (error) {
         if (error.type != DioErrorType.response) {
           yield CoffeeError(reason: GenericApiErrorReason.noConnection);

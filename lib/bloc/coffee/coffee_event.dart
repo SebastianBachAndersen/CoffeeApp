@@ -9,6 +9,8 @@ abstract class CoffeeEvent extends Equatable {
 
 class FetchCoffees extends CoffeeEvent {}
 
+class FetchUserRatings extends CoffeeEvent {}
+
 class CreateCofee extends CoffeeEvent {
   final String name;
   final DateTime date;

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:the_coffe_collection/Models/coffee.dart';
 import 'package:the_coffe_collection/Models/coffee_rating.dart';
+import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/enums/genre_enum.dart';
 import 'package:the_coffe_collection/enums/serving_style.dart';
 import 'package:the_coffe_collection/networking/api_provider.dart';
@@ -40,5 +41,10 @@ class CoffeeRepository {
 
     final response = await _provider.post("RateCoffee", jsonBody: data);
     return CoffeeRating.fromJson(response);
+  }
+
+  Future<User> getUserRatings() async {
+    final response = await _provider.get('User/Ratings');
+    return User.fromJson(response);
   }
 }

@@ -1,13 +1,20 @@
 import 'dart:developer';
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_coffe_collection/Models/coffee_rating.dart';
+import 'package:the_coffe_collection/Models/user.dart';
 import 'package:the_coffe_collection/Pages/friends_view.dart';
 import 'package:the_coffe_collection/Pages/settings.dart';
 import 'package:the_coffe_collection/bloc/authentication/authentication_bloc.dart';
+import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
 import 'package:the_coffe_collection/components/User_placeholder.dart';
+import 'package:the_coffe_collection/components/user_coffee_rating_card.dart';
+import 'package:the_coffe_collection/enums/serving_style.dart';
+import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 import 'package:the_coffe_collection/repositories/user_repository.dart';
 import 'package:the_coffe_collection/utils/shared_preferences.dart';
 
@@ -52,157 +59,177 @@ class _State extends State<ProfileView> {
                 }),
           ],
         ),
-        body: ListView(
-          children: [
-            Container(
-              height: 210,
-              child: BlocProvider(
-                create: (context) {
-                  return AuthenticationBloc(
-                    userRepository:
-                        RepositoryProvider.of<UserRepository>(context),
-                  )..add(LoggedIn());
-                },
-                child: User_placeholder(),
-              ), //der skal noget ind her
-            ),
-            Container(
-              color: Colors.brown,
-              child: Card(
-                child: Column(
+        body: BlocProvider(
+          create: (BuildContext context) => CoffeeBloc(
+              coffeeRepository:
+                  RepositoryProvider.of<CoffeeRepository>(context))
+            ..add(FetchUserRatings()),
+          child: BlocBuilder<CoffeeBloc, CoffeeState>(
+            builder: (context, state) {
+              if (state is UserCoffeeRatingsLoaded) {
+                return Container(
+                  child: ListView(
+                    children: [
+                      Container(height: 210, child: User_placeholder()),
+                      ...state.user.coffeeRatings
+                          .map<Widget>((coffeeRating) =>
+                              ratingCard(coffeeRating, state.user.firstName))
+                          .toList()
+                    ],
+                  ),
+                );
+              } else if (state is UserCoffeeRatingsLoading) {
+                return Container(
+                  decoration:
+                      BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              } else {
+                return Container(
+                  decoration:
+                      BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget ratingCard(CoffeeRating coffeeRating, String name) {
+  return Container(
+    color: Colors.brown,
+    child: Card(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                child: Image(
+                  width: 50,
+                  height: 50,
+                  image: AssetImage("assets/images/Placeholder_profilePic.png"),
+                ),
+              ),
+              Text(
+                name ?? "username",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xffAB6832),
+                  height: 1,
+                ),
+              )
+            ],
+          ),
+          Container(
+            decoration: BoxDecoration(border: Border.all(color: Colors.brown)),
+            margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Row(
+                    Container(
+                      width: 100,
+                      child: Image(
+                        width: 150,
+                        height: 150,
+                        image:
+                            AssetImage("assets/images/coffeePlaceholder.png"),
+                      ),
+                    ),
+                    Column(
                       children: [
-                        Container(
-                          margin: new EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Image(
-                            width: 50,
-                            height: 50,
-                            image: AssetImage(
-                                "assets/images/Placeholder_profilePic.png"),
-                          ),
-                        ),
                         Text(
-                          "username",
+                          coffeeRating.coffeeName ?? "Coffee Name",
                           style: TextStyle(
                             fontSize: 20,
                             color: Color(0xffAB6832),
                             height: 1,
                           ),
-                        )
+                        ),
+                        Text(
+                          coffeeRating.coffeeCompanyName ?? "Coffee Name",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xffAB6832),
+                            height: 1,
+                          ),
+                        ),
+                        Text(
+                          EnumToString.convertToString(
+                                  coffeeRating.serveringStyle,
+                                  camelCase: true) ??
+                              "Coffee Name",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xffAB6832),
+                            height: 1,
+                          ),
+                        ),
                       ],
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.brown)),
-                      margin: new EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 20),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 100,
-                                child: Image(
-                                  width: 150,
-                                  height: 150,
-                                  image: AssetImage(
-                                      "assets/images/coffeePlaceholder.png"),
-                                ),
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Coffee Name",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xffAB6832),
-                                      height: 1,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Coffee Name",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xffAB6832),
-                                      height: 1,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Coffee Name",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xffAB6832),
-                                      height: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: new EdgeInsets.only(
-                                left: 60.0, top: 20, bottom: 20),
-                            child: Row(
-                              children: [
-                                RatingBar.builder(
-                                  initialRating: 0,
-                                  minRating: 0,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 5,
-                                  ignoreGestures: true,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 4.0),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                  onRatingUpdate: (rating) {
-                                    setState(() {});
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.only(left: 40.0, bottom: 20),
-                            child: Row(children: [
-                              Text(
-                                "User Commnent",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xffAB6832),
-                                  height: 1,
-                                ),
-                              ),
-                            ]),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.only(left: 60.0, bottom: 20),
-                            child: Row(children: [
-                              Text(
-                                "placeholder text",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xffAB6832),
-                                  height: 1,
-                                ),
-                              ),
-                            ]),
-                          )
-                        ],
-                      ),
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
-        ),
+                Container(
+                  margin: new EdgeInsets.only(left: 60.0, top: 20, bottom: 20),
+                  child: Row(
+                    children: [
+                      RatingBar.builder(
+                        initialRating: coffeeRating.rating,
+                        minRating: 0,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        ignoreGestures: true,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {},
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: new EdgeInsets.only(left: 40.0, bottom: 20),
+                  child: Row(children: [
+                    Text(
+                      "Commnent",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xffAB6832),
+                        height: 1,
+                      ),
+                    ),
+                  ]),
+                ),
+                Container(
+                  margin: new EdgeInsets.only(left: 60.0, bottom: 20),
+                  child: Row(children: [
+                    Text(
+                      coffeeRating.comment ?? "Comment",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xffAB6832),
+                        height: 1,
+                      ),
+                    ),
+                  ]),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }
 
 Widget logoutDialog(BuildContext context) {

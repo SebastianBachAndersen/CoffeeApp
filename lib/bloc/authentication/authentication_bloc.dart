@@ -32,7 +32,6 @@ class AuthenticationBloc
           yield AuthenticationUnauthenticated();
         }
       } on DioError {
-        // TODO: Also check for connection issues & show a "no connection" error if they occur
         yield AuthenticationUnauthenticated();
       }
     }
