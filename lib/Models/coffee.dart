@@ -13,6 +13,7 @@ class Coffee {
   String coffeeCompanyId;
   String coffeeCompanyName;
   double averageRating;
+  String imageLink;
 
   Coffee(
       {this.id,
@@ -21,7 +22,8 @@ class Coffee {
       this.genreName,
       this.coffeeCompanyId,
       this.coffeeCompanyName,
-      this.averageRating});
+      this.averageRating,
+      this.imageLink});
 
   Coffee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -31,6 +33,7 @@ class Coffee {
     coffeeCompanyId = json['coffeeCompanyId'];
     coffeeCompanyName = json['coffeeCompanyName'];
     averageRating = json['averageRating'].toDouble();
+    imageLink = json['imageLink'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +45,7 @@ class Coffee {
     data['coffeeCompanyId'] = this.coffeeCompanyId;
     data['coffeeCompanyName'] = this.coffeeCompanyName;
     data['averageRating'] = this.averageRating.toString();
+    data['imageLink'] = this.imageLink;
     return data;
   }
 }

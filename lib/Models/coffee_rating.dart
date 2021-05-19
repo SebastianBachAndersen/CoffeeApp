@@ -11,6 +11,7 @@ class CoffeeRating {
   String coffeeName;
   ServingStyle serveringStyle;
   String coffeeCompanyName;
+  String imageLink;
 
   CoffeeRating(
       {this.id,
@@ -22,7 +23,8 @@ class CoffeeRating {
       this.serveringStyle,
       this.userId,
       this.coffeeName,
-      this.coffeeCompanyName});
+      this.coffeeCompanyName,
+      this.imageLink});
 
   CoffeeRating.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,6 +37,7 @@ class CoffeeRating {
     coffeeName = json['coffeeName'];
     serveringStyle = ServingStyle.values[json['serveringStyle']];
     coffeeCompanyName = json['coffeeCompanyName'];
+    imageLink = json['imageLink'];
   }
 
   Map<String, dynamic> toJson() {
@@ -49,6 +52,7 @@ class CoffeeRating {
     data['coffeeName'] = this.coffeeName;
     data['serveringStyle'] = this.serveringStyle.index;
     data['coffeeCompanyName'] = this.coffeeCompanyName;
+    data['imageLink'] = this.imageLink;
     return data;
   }
 }
