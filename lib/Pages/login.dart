@@ -49,6 +49,7 @@ class _LoginFormState extends State<LoginPage> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_coffe_collection/Models/coffee.dart';
+import 'package:the_coffe_collection/Pages/rate_coffee_route.dart';
 import 'package:the_coffe_collection/bloc/coffee/coffee_bloc.dart';
+import 'package:the_coffe_collection/main.dart';
 import 'package:the_coffe_collection/repositories/coffee_repository.dart';
 
 import 'landing_page.dart';
@@ -15,11 +18,12 @@ class _State extends State<SearchView> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Color(0xff49281A),
           title: const Text('Search'),
         ),
-        body: Center(child: ListSearch()),
+        body: Container(child: ListSearch()),
       ),
     );
   }
@@ -32,16 +36,21 @@ class ListSearch extends StatefulWidget {
 class ListSearchState extends State<ListSearch> {
   TextEditingController _textController = TextEditingController();
 
-  static List<String> mainDataList = [];
+  List<Coffee> mainDataList = [];
 
   // Copy Main List into New List.
-  List<String> newDataList = List.from(mainDataList);
+  List<Coffee> newDataList = [];
 
   onItemChanged(String value) {
-    if (value == "") {}
+    if (value == "") {
+      newDataList = [];
+      newDataList = mainDataList;
+    }
     setState(() {
+      newDataList = [];
       newDataList = mainDataList
-          .where((string) => string.toLowerCase().contains(value.toLowerCase()))
+          .where((string) =>
+              string.name.toLowerCase().contains(value.toLowerCase()))
           .toList();
     });
   }
@@ -55,16 +64,17 @@ class ListSearchState extends State<ListSearch> {
       child: BlocBuilder<CoffeeBloc, CoffeeState>(
         builder: (context, state) {
           if (state is CoffeeListLoaded) {
-            mainDataList
-                .addAll(state.coffees.map((coffee) => coffee.name).toList());
+            mainDataList = state.coffees;
             return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextField(
                     controller: _textController,
                     decoration: InputDecoration(
-                      hintText: 'Search Here...',
+                      hintText: 'Search for coffee',
                     ),
                     onChanged: onItemChanged,
                   ),
@@ -72,8 +82,9 @@ class ListSearchState extends State<ListSearch> {
                 Expanded(
                   child: ListView(
                     padding: EdgeInsets.all(12.0),
-                    children:
-                        newDataList.map((name) => coffeeNames(name)).toList(),
+                    children: newDataList
+                        .map((coffee) => coffeeNames(coffee, context))
+                        .toList(),
                   ),
                 ),
               ],
@@ -90,6 +101,17 @@ class ListSearchState extends State<ListSearch> {
   }
 }
 
-Widget coffeeNames(String name) {
-  return ListTile(title: Text(name));
+Widget coffeeNames(
+  Coffee coffee,
+  BuildContext context,
+) {
+  return ListTile(
+    title: Text(coffee.name),
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RateCoffeeRoute(coffee: coffee)));
+    },
+  );
 }
