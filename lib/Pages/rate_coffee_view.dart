@@ -220,7 +220,7 @@ class _State extends State<RateCoffeeView> {
       children: [
         ChoiceChip(
           selected: _selected1,
-          label: Text('Amrikano'),
+          label: Text('Americano'),
           onSelected: (bool selected) {
             setState(() {
               _selected1 = !_selected1;
@@ -232,7 +232,7 @@ class _State extends State<RateCoffeeView> {
         ),
         ChoiceChip(
           selected: _selected2,
-          label: Text('Esprasso'),
+          label: Text('Espresso'),
           onSelected: (bool selected) {
             setState(() {
               _selected2 = !_selected2;
@@ -256,7 +256,7 @@ class _State extends State<RateCoffeeView> {
         ),
         ChoiceChip(
           selected: _selected4,
-          label: Text('ColdBrew'),
+          label: Text('Cold Brew'),
           onSelected: (bool selected) {
             setState(() {
               _selected4 = !_selected4;
